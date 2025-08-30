@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgrydh38f63bv"]
+[gd_scene load_steps=9 format=3 uid="uid://bgrydh38f63bv"]
 
 [ext_resource type="Script" uid="uid://bvls5jgam3ntc" path="res://Scripts/Player/Player.cs" id="1_um8lo"]
+[ext_resource type="ArrayMesh" uid="uid://be2qx03bn66da" path="res://Assets/blend/Exports/sword.obj" id="2_kyqiw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f3sb7"]
 
@@ -9,6 +10,66 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
 vertex_color_use_as_albedo = true
 albedo_color = Color(1, 0.100912, 0.210785, 1)
+
+[sub_resource type="Animation" id="Animation_kyqiw"]
+resource_name = "sword_swing"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Viewport/SwordPoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.966667),
+"transitions": PackedFloat32Array(1, 0.5, 0.5, 2),
+"update": 0,
+"values": [Vector3(0.305295, -0.276147, -0.269288), Vector3(0.305295, -0.276147, -0.237996), Vector3(-0.360251, -0.346165, -0.203209), Vector3(0.305295, -0.276147, -0.269288)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Viewport/SwordPoint:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.966667),
+"transitions": PackedFloat32Array(1, 0.5, 0.5, 2),
+"update": 0,
+"values": [Vector3(-0.155909, -1.4312, 0.086615), Vector3(-0.122352, -1.40106, -0.129864), Vector3(-1.42728, -0.077326, 2.39775), Vector3(-0.155909, -1.4312, 0.086615)]
+}
+
+[sub_resource type="Animation" id="Animation_gntrk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Viewport/SwordPoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.305295, -0.276147, -0.269288)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Viewport/SwordPoint:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.155909, -1.4312, 0.086615)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dewec"]
+_data = {
+&"RESET": SubResource("Animation_gntrk"),
+&"sword_swing": SubResource("Animation_kyqiw")
+}
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_um8lo")
@@ -25,4 +86,25 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fj7yv")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23862, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Viewport" type="Node3D" parent="Head"]
+
+[node name="Camera3D" type="Camera3D" parent="Head/Viewport"]
+
+[node name="SwordPoint" type="Node3D" parent="Head/Viewport"]
+transform = Transform3D(0.15192, 0.141155, -0.978261, 0.0854574, 0.984168, 0.155278, 0.984691, -0.10719, 0.137452, 0.305295, -0.276147, -0.269288)
+
+[node name="Sword" type="MeshInstance3D" parent="Head/Viewport/SwordPoint"]
+mesh = ExtResource("2_kyqiw")
+skeleton = NodePath("../../../..")
+
+[node name="Helpers" type="Node3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Helpers"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_dewec")
+}
+
+[node name="SwordAttackCooldown" type="Timer" parent="Helpers"]
+
+[connection signal="timeout" from="Helpers/SwordAttackCooldown" to="." method="_on_sword_attack_cooldown_timeout"]

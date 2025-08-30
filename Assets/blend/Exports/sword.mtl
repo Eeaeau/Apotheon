@@ -1,0 +1,13 @@
+# Blender 4.5.2 LTS MTL File: 'sword.blend'
+# www.blender.org
+
+newmtl Historic_Medieval_Weapon_Sword_Steel_Worn_uh1fdetfa
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd D:/Work/Godot/KakaoJam 2025-1/Apotheon/Assets/blend/textures/uh1fdetfa_2K_Albedo_LOD5.jpg
+map_Ns D:/Work/Godot/KakaoJam 2025-1/Apotheon/Assets/blend/textures/uh1fdetfa_2K_Roughness.jpg
+map_Bump -bm 1.000000 D:/Work/Godot/KakaoJam 2025-1/Apotheon/Assets/blend/textures/uh1fdetfa_2K_Normal_LOD5.jpg

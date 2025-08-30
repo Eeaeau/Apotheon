@@ -29,16 +29,23 @@ public partial class Player : CharacterBody3D
 
 
 	private Node3D _head;
+	private Node3D _viewport;
 	private Camera3D _cam;
+	private AnimationPlayer _animationPlayer;
+	private Timer _swordAttackCooldownTimer;
 
 	private bool _isSprinting = false;
+	private bool _isAttackOnCooldown = false;
 	private float _bobTime = 0f;
 
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		_head = GetNode<Node3D>("Head");
-		_cam = GetNode<Camera3D>("Head/Camera3D");
+		_viewport = GetNode<Node3D>("Head/Viewport");
+		_cam = GetNode<Camera3D>("Head/Viewport/Camera3D");
+		_animationPlayer = GetNode<AnimationPlayer>("Helpers/AnimationPlayer");
+		_swordAttackCooldownTimer = GetNode<Timer>("Helpers/SwordAttackCooldown");
 		_cam.Fov = _camDefaultFOV;
 	}
 
@@ -47,12 +54,12 @@ public partial class Player : CharacterBody3D
 		if (@event is InputEventMouseMotion m)
 		{
 			_head.RotateY(-m.Relative.X * _camSensitivity);
-			_cam.RotateX(-m.Relative.Y * _camSensitivity);
+			_viewport.RotateX(-m.Relative.Y * _camSensitivity);
 
-			Vector3 camRot = _cam.Rotation;
+			Vector3 camRot = _viewport.Rotation;
 			camRot.X = Mathf.Clamp(camRot.X,
 				Mathf.DegToRad(-80f), Mathf.DegToRad(80f));
-			_cam.Rotation = camRot;
+			_viewport.Rotation = camRot;
 		}
 
 		// exit mouse captured mode with Escape
@@ -81,6 +88,12 @@ public partial class Player : CharacterBody3D
 	}
 
 	public override void _PhysicsProcess(double delta)
+	{
+		Move(delta);
+		Attack();		
+	}
+
+	private void Move(double delta)
 	{
 		Vector3 velocity = Velocity;
 
@@ -119,14 +132,32 @@ public partial class Player : CharacterBody3D
 			velocity.X = Single.Lerp(velocity.X, direction.X * speed, (float)delta * 3f);
 			velocity.Z = Single.Lerp(velocity.Z, direction.Z * speed, (float)delta * 3f);
 		}
-		
+
 
 		Velocity = velocity;
 		MoveAndSlide();
-
+		
 		// Head bobbing
 		_bobTime += (float)delta * velocity.Length() * (float)(IsOnFloor() ? 1.0f : 0.0f);
 		_cam.Position = HeadBob(_bobTime);
+	}
+
+	private void Attack()
+	{
+		if (Input.IsActionJustPressed("attack") && !_isAttackOnCooldown)
+		{
+			_isAttackOnCooldown = true;
+			_swordAttackCooldownTimer.Start();
+			_animationPlayer.Play("sword_swing");
+
+
+		}
+	}
+
+	private void _on_sword_attack_cooldown_timeout()
+	{
+		_isAttackOnCooldown = false;
+		_swordAttackCooldownTimer.Stop();
 	}
 
 	private Vector3 HeadBob(float time)
