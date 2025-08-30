@@ -17,11 +17,12 @@ script = ExtResource("1_um8lo")
 shape = SubResource("CapsuleShape3D_f3sb7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+visible = false
 mesh = SubResource("CapsuleMesh_gv5m4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_fj7yv")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.929657, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23862, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]

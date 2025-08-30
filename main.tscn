@@ -1,7 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck5fi47134a65"]
+[gd_scene load_steps=3 format=3 uid="uid://ck5fi47134a65"]
 
-[ext_resource type="PackedScene" uid="uid://d28xpolrw47kq" path="res://Scenes/arena.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dxdo6ck1llul3" path="res://Scenes/Environment/arena.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bgrydh38f63bv" path="res://Scenes/Player.tscn" id="2_0xm2m"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Arena" parent="." instance=ExtResource("1_ig7tw")]
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Arena" parent="Environment" instance=ExtResource("1_ig7tw")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.999521, -0.00206397, 0.0308708, -0.0309398, -0.0666773, 0.997295, 0, -0.997772, -0.0667092, 0, 30.4829, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
