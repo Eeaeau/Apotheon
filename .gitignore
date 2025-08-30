@@ -17,3 +17,5 @@ mono_crash.*.json
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+*.blend1
