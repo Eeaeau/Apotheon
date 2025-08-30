@@ -1,4 +1,5 @@
 .nomedia
+.vscode/
 
 # Godot-specific ignores
 .import/
