@@ -6,6 +6,8 @@ public partial class Enemy : CharacterBody3D
 	[Export]
 	private Attribute.Element _element;
 	[Export]
+	private bool _transferElementOnDeath = true;
+	[Export]
 	private float _maxHealth = 100;
 
 
@@ -32,13 +34,28 @@ public partial class Enemy : CharacterBody3D
 		if (_currentHealth <= 0)
 		{
 			Die();
-		}		
+		}
 	}
 
 	private void Die()
 	{
 		GD.Print($"{this.Name} perishes");
+		TransferElementOnDeath();
 		QueueFree();
+	}
+
+	private void TransferElementOnDeath()
+	{
+		if (!_transferElementOnDeath) return;
+
+		GD.Print($"Thansferring {_element} element to the player");
+
+		//Clunky, but there should always be only one player object on the scene, so it should be fine for now
+		var players = GetTree().GetNodesInGroup("Player");
+		foreach (Player player in players)
+		{
+			player.ReceiveWeaponElement(_element);
+		}
 	}
 
 }

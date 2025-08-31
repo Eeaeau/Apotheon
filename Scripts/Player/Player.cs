@@ -172,7 +172,7 @@ public partial class Player : CharacterBody3D
 			{
 				if (body is Enemy enemy)
 				{
-					enemy.GetHurt(_weapon.baseDamage, _weapon.element);
+					enemy.GetHurt(_weapon.baseDamage, _weapon.Element);
 				}
 			}
 
@@ -185,8 +185,13 @@ public partial class Player : CharacterBody3D
 		UpdateHealth();
 	}
 
+	public void ReceiveWeaponElement(Attribute.Element element)
+	{
+		_weapon.Element = element;
+	}
+
 	private void UpdateHealth()
-	{		
+	{
 		_healthBar.Value = _currentHealth;
 
 		if (_currentHealth <= 0)
