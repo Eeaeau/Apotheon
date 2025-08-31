@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bcl02jqa3d4ex"]
 
 [ext_resource type="Script" uid="uid://dcinkkodnnbmj" path="res://Scripts/Enemies/Enemy.cs" id="1_ioxns"]
-[ext_resource type="ArrayMesh" uid="uid://be2qx03bn66da" path="res://Assets/blend/Exports/sword.obj" id="2_fyfwg"]
+[ext_resource type="PackedScene" uid="uid://y377bx84je1t" path="res://Assets/blend/sword.blend" id="2_ioxns"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f3sb7"]
 
@@ -102,9 +102,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23862, 0)
 [node name="SwordPoint" type="Node3D" parent="Head/Viewport"]
 transform = Transform3D(0.303847, 0.282309, -1.95652, 0.170915, 1.96834, 0.310556, 1.96938, -0.214381, 0.274911, 0.667537, -1.19189, -0.269288)
 
-[node name="Sword" type="MeshInstance3D" parent="Head/Viewport/SwordPoint"]
-mesh = ExtResource("2_fyfwg")
-skeleton = NodePath("../../../..")
+[node name="sword" parent="Head/Viewport/SwordPoint" instance=ExtResource("2_ioxns")]
 
 [node name="Hitbox" type="Area3D" parent="Head/Viewport"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.415264, -1.16733)

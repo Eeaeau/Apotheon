@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvls5jgam3ntc" path="res://Scripts/Player/Player.cs" id="1_um8lo"]
 [ext_resource type="Script" uid="uid://drtkkjjtkx2v0" path="res://Scripts/Weapon.cs" id="2_gntrk"]
-[ext_resource type="ArrayMesh" uid="uid://be2qx03bn66da" path="res://Assets/blend/Exports/sword.obj" id="2_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://y377bx84je1t" path="res://Assets/blend/sword.blend" id="3_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://dse00iu1eibqx" path="res://Assets/sprites/healthbarbacunder.png" id="4_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://bvn7v653e3sea" path="res://Assets/sprites/healthbarover.png" id="5_nn08x"]
 
@@ -103,9 +103,7 @@ baseDamage = 10.0
 [node name="SwordPoint" type="Node3D" parent="Head/Viewport/Weapon"]
 transform = Transform3D(0.151924, 0.141154, -0.978261, 0.0854574, 0.984168, 0.155278, 0.98469, -0.10719, 0.137456, 0.305295, -0.276147, -0.269288)
 
-[node name="Sword" type="MeshInstance3D" parent="Head/Viewport/Weapon/SwordPoint"]
-mesh = ExtResource("2_kyqiw")
-skeleton = NodePath("../../../../..")
+[node name="sword" parent="Head/Viewport/Weapon/SwordPoint" instance=ExtResource("3_5ixxa")]
 
 [node name="Hitbox" type="Area3D" parent="Head/Viewport"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.415264, -1.16733)
