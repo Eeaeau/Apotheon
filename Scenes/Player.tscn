@@ -108,14 +108,9 @@ transform = Transform3D(0.151924, 0.141154, -0.978261, 0.0854574, 0.984168, 0.15
 
 [node name="sword" parent="Head/Viewport/Weapon/SwordPoint" instance=ExtResource("3_5ixxa")]
 
-[node name="Effect" type="Node3D" parent="Head/Viewport/Weapon/SwordPoint" node_paths=PackedStringArray("Effects")]
+[node name="Effect" type="Node3D" parent="Head/Viewport/Weapon/SwordPoint"]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0.2, 0)
 script = ExtResource("4_52ee3")
-Effects = {
-0: NodePath("Water"),
-1: NodePath("Fire"),
-2: NodePath("Earth")
-}
 
 [node name="Water" parent="Head/Viewport/Weapon/SwordPoint/Effect" instance=ExtResource("5_megsn")]
 visible = false
