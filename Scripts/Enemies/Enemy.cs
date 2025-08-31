@@ -7,6 +7,7 @@ public partial class Enemy : CharacterBody3D
 	[Export] private bool _transferElementOnDeath = true;
 	[Export] private float _maxHealth = 100;
 	[Export] private float _moveSpeed = 4f;
+	[Export] private float _turnSpeed = 8f; // Rotation speed when turning toward movement
 	[Export] private Node3D _target; // Assign the player node in the editor
 	[Export] private NavigationAgent3D _agent; // Now exported for explicit assignment
 	[Export] private bool _debug = false; // Enable/disable debug prints
@@ -102,6 +103,14 @@ public partial class Enemy : CharacterBody3D
 		{
 			Vector3 desiredVel = moveDir.Normalized() * _moveSpeed;
 			Velocity = new Vector3(desiredVel.X, Velocity.Y, desiredVel.Z);
+
+			// Smoothly rotate to face movement direction (Godot forward is -Z, so build basis looking along moveDir)
+			Vector3 forward = moveDir.Normalized();
+			var targetBasis = Basis.LookingAt(forward, Vector3.Up); // Fixed static call
+			var currentQ = GlobalTransform.Basis.GetRotationQuaternion();
+			var targetQ = targetBasis.GetRotationQuaternion();
+			var newQ = currentQ.Slerp(targetQ, (float)(delta * _turnSpeed));
+			GlobalTransform = new Transform3D(new Basis(newQ), GlobalTransform.Origin); // Convert quaternion to Basis
 		}
 		else
 		{
