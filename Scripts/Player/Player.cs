@@ -58,6 +58,7 @@ public partial class Player : CharacterBody3D
 		_swordAttackCooldownTimer = GetNode<Timer>("Helpers/SwordAttackCooldown");
 		_healthBar = GetNode<TextureProgressBar>("Helpers/HUD/HealthBar");
 
+		_cam.MakeCurrent();
 		_cam.Fov = _camDefaultFOV;
 		_currentHealth = _maxHealth;
 		UpdateHealth();
