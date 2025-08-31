@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck5fi47134a65"]
+[gd_scene load_steps=11 format=3 uid="uid://ck5fi47134a65"]
 
+[ext_resource type="Script" uid="uid://8kwd1pq73y4n" path="res://Scripts/GameManager.cs" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://dxdo6ck1llul3" path="res://Scenes/Environment/arena.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bgrydh38f63bv" path="res://Scenes/Player.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bv2j6rceuyoxq" path="res://Scenes/Enemies/EnemyCyclops.tscn" id="3_lquwl"]
@@ -20,6 +21,9 @@ background_mode = 2
 sky = SubResource("Sky_7mycd")
 
 [node name="Node3D" type="Node3D"]
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("1_272bh")
 
 [node name="Environment" type="Node3D" parent="."]
 
