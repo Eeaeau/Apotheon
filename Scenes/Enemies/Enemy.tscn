@@ -84,12 +84,12 @@ script = ExtResource("1_wovta")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_f3sb7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="Body" type="MeshInstance3D" parent="CollisionShape3D"]
 mesh = SubResource("CapsuleMesh_gv5m4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_fj7yv")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="Eye" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(0.3, 0, 0, 0, -4.37114e-09, -0.3, 0, 0.1, -1.31134e-08, 0, 0.588865, -0.425177)
 mesh = SubResource("CylinderMesh_m1htj")
 surface_material_override/0 = SubResource("StandardMaterial3D_wovta")
@@ -100,7 +100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23862, 0)
 [node name="Viewport" type="Node3D" parent="Head"]
 
 [node name="SwordPoint" type="Node3D" parent="Head/Viewport"]
-transform = Transform3D(0.303847, 0.282309, -1.95652, 0.170915, 1.96834, 0.310556, 1.96938, -0.21438, 0.274911, 0.667537, -1.19189, -0.269288)
+transform = Transform3D(0.303847, 0.282309, -1.95652, 0.170915, 1.96834, 0.310556, 1.96938, -0.214381, 0.274911, 0.667537, -1.19189, -0.269288)
 
 [node name="Sword" type="MeshInstance3D" parent="Head/Viewport/SwordPoint"]
 mesh = ExtResource("2_xeo28")

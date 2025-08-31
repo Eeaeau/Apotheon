@@ -27,15 +27,12 @@ public partial class Player : CharacterBody3D
 	[Export]
 	private float _bobAmplitude = 0.08f;
 
-	[ExportGroup("Weapons")]
-	[Export]
-	private float _swordBaseDamage = 10.0f;
-
 
 	private Node3D _head;
 	private Node3D _viewport;
 	private Area3D _hitbox;
 	private Camera3D _cam;
+	private Weapon _weapon;
 	private AnimationPlayer _animationPlayer;
 	private Timer _swordAttackCooldownTimer;
 
@@ -50,6 +47,7 @@ public partial class Player : CharacterBody3D
 		_viewport = GetNode<Node3D>("Head/Viewport");
 		_hitbox = GetNode<Area3D>("Head/Viewport/Hitbox");
 		_cam = GetNode<Camera3D>("Head/Viewport/Camera3D");
+		_weapon = GetNode<Weapon>("Head/Viewport/Weapon");
 		_animationPlayer = GetNode<AnimationPlayer>("Helpers/AnimationPlayer");
 		_swordAttackCooldownTimer = GetNode<Timer>("Helpers/SwordAttackCooldown");
 		_cam.Fov = _camDefaultFOV;
@@ -150,7 +148,7 @@ public partial class Player : CharacterBody3D
 
 	private void Attack()
 	{
-		if (Input.IsActionJustPressed("attack") && !_isAttackOnCooldown)
+		if (Input.IsActionPressed("attack") && !_isAttackOnCooldown)
 		{
 			//Play animation
 			_isAttackOnCooldown = true;
@@ -163,7 +161,7 @@ public partial class Player : CharacterBody3D
 			{
 				if (body is Enemy enemy)
 				{
-					enemy.GetHurt(_swordBaseDamage);
+					enemy.GetHurt(_weapon.baseDamage, _weapon.element);
 				}
 			}
 
