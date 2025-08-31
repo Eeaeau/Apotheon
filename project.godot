@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 project/assembly_name="Apotheon"
 
+[global_group]
+
+Player="A group for player character(s)"
+Enemy="A group for enemy characters"
+
 [input]
 
 move_left={

@@ -1,10 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgrydh38f63bv"]
+[gd_scene load_steps=17 format=3 uid="uid://bgrydh38f63bv"]
 
 [ext_resource type="Script" uid="uid://bvls5jgam3ntc" path="res://Scripts/Player/Player.cs" id="1_um8lo"]
 [ext_resource type="Script" uid="uid://drtkkjjtkx2v0" path="res://Scripts/Weapon.cs" id="2_gntrk"]
 [ext_resource type="PackedScene" uid="uid://y377bx84je1t" path="res://Assets/blend/sword.blend" id="3_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://dse00iu1eibqx" path="res://Assets/sprites/healthbarbacunder.png" id="4_5ixxa"]
+[ext_resource type="Script" uid="uid://tcy7vl0vh0r" path="res://Scripts/WeaponEffect.cs" id="4_52ee3"]
+[ext_resource type="PackedScene" uid="uid://dw1187pnwmutb" path="res://Scenes/VFX/FireLong.tscn" id="4_nn08x"]
+[ext_resource type="PackedScene" uid="uid://ck8xdy7ikofe7" path="res://Scenes/VFX/WaterLong.tscn" id="5_megsn"]
 [ext_resource type="Texture2D" uid="uid://bvn7v653e3sea" path="res://Assets/sprites/healthbarover.png" id="5_nn08x"]
+[ext_resource type="PackedScene" uid="uid://d3u1tdivgnc1" path="res://Scenes/VFX/EarthLong.tscn" id="7_yoq75"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f3sb7"]
 
@@ -77,7 +81,7 @@ _data = {
 &"sword_swing": SubResource("Animation_kyqiw")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_um8lo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -97,13 +101,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886707, 0)
 
 [node name="Weapon" type="Node3D" parent="Head/Viewport"]
 script = ExtResource("2_gntrk")
-element = 1
 baseDamage = 10.0
 
 [node name="SwordPoint" type="Node3D" parent="Head/Viewport/Weapon"]
 transform = Transform3D(0.151924, 0.141154, -0.978261, 0.0854574, 0.984168, 0.155278, 0.98469, -0.10719, 0.137456, 0.305295, -0.276147, -0.269288)
 
 [node name="sword" parent="Head/Viewport/Weapon/SwordPoint" instance=ExtResource("3_5ixxa")]
+
+[node name="Effect" type="Node3D" parent="Head/Viewport/Weapon/SwordPoint" node_paths=PackedStringArray("Effects")]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0.2, 0)
+script = ExtResource("4_52ee3")
+Effects = {
+0: NodePath("Water"),
+1: NodePath("Fire"),
+2: NodePath("Earth")
+}
+
+[node name="Water" parent="Head/Viewport/Weapon/SwordPoint/Effect" instance=ExtResource("5_megsn")]
+visible = false
+
+[node name="Fire" parent="Head/Viewport/Weapon/SwordPoint/Effect" instance=ExtResource("4_nn08x")]
+visible = false
+
+[node name="Earth" parent="Head/Viewport/Weapon/SwordPoint/Effect" instance=ExtResource("7_yoq75")]
+visible = false
 
 [node name="Hitbox" type="Area3D" parent="Head/Viewport"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.415264, -1.16733)
