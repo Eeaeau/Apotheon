@@ -80,7 +80,7 @@ _data = {
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_ko0ql")
-element = 1
+_element = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_f3sb7")

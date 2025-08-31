@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgrydh38f63bv"]
+[gd_scene load_steps=13 format=3 uid="uid://bgrydh38f63bv"]
 
 [ext_resource type="Script" uid="uid://bvls5jgam3ntc" path="res://Scripts/Player/Player.cs" id="1_um8lo"]
 [ext_resource type="Script" uid="uid://drtkkjjtkx2v0" path="res://Scripts/Weapon.cs" id="2_gntrk"]
 [ext_resource type="ArrayMesh" uid="uid://be2qx03bn66da" path="res://Assets/blend/Exports/sword.obj" id="2_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://dse00iu1eibqx" path="res://Assets/sprites/healthbarbacunder.png" id="4_5ixxa"]
+[ext_resource type="Texture2D" uid="uid://bvn7v653e3sea" path="res://Assets/sprites/healthbarover.png" id="5_nn08x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f3sb7"]
 
@@ -120,5 +122,17 @@ libraries = {
 }
 
 [node name="SwordAttackCooldown" type="Timer" parent="Helpers"]
+
+[node name="HUD" type="CanvasLayer" parent="Helpers"]
+
+[node name="HealthBar" type="TextureProgressBar" parent="Helpers/HUD"]
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 289.0
+offset_bottom = 90.0
+scale = Vector2(1.5, 1.5)
+value = 50.0
+texture_under = ExtResource("4_5ixxa")
+texture_progress = ExtResource("5_nn08x")
 
 [connection signal="timeout" from="Helpers/SwordAttackCooldown" to="." method="_on_sword_attack_cooldown_timeout"]

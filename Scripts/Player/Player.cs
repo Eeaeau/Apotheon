@@ -3,6 +3,10 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
+	[ExportGroup("Stats")]
+	[Export]
+	private float _maxHealth = 100f;
+
 	[ExportGroup("Movement")]
 	[Export]
 	private float _speed = 5.0f;
@@ -35,7 +39,9 @@ public partial class Player : CharacterBody3D
 	private Weapon _weapon;
 	private AnimationPlayer _animationPlayer;
 	private Timer _swordAttackCooldownTimer;
+	private TextureProgressBar _healthBar;
 
+	private float _currentHealth;
 	private bool _isSprinting = false;
 	private bool _isAttackOnCooldown = false;
 	private float _bobTime = 0f;
@@ -50,7 +56,11 @@ public partial class Player : CharacterBody3D
 		_weapon = GetNode<Weapon>("Head/Viewport/Weapon");
 		_animationPlayer = GetNode<AnimationPlayer>("Helpers/AnimationPlayer");
 		_swordAttackCooldownTimer = GetNode<Timer>("Helpers/SwordAttackCooldown");
+		_healthBar = GetNode<TextureProgressBar>("Helpers/HUD/HealthBar");
+
 		_cam.Fov = _camDefaultFOV;
+		_currentHealth = _maxHealth;
+		UpdateHealth();
 	}
 
 	public override void _Input(InputEvent @event)
@@ -166,6 +176,27 @@ public partial class Player : CharacterBody3D
 			}
 
 		}
+	}
+
+	public void GetHurt(float damage)
+	{
+		_currentHealth -= damage;
+		UpdateHealth();
+	}
+
+	private void UpdateHealth()
+	{		
+		_healthBar.Value = _currentHealth;
+
+		if (_currentHealth <= 0)
+		{
+			Die();
+		}
+	}
+
+	private void Die()
+	{
+
 	}
 
 	private void _on_sword_attack_cooldown_timeout()
