@@ -120,4 +120,6 @@ libraries = {
 
 [node name="SwordAttackCooldown" type="Timer" parent="Helpers"]
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
 [connection signal="timeout" from="Helpers/SwordAttackCooldown" to="." method="_on_sword_attack_cooldown_timeout"]

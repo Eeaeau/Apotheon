@@ -51,8 +51,9 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 
-[node name="Siren" parent="." instance=ExtResource("5_272bh")]
+[node name="Siren" parent="." node_paths=PackedStringArray("_target") instance=ExtResource("5_272bh")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5, 1, -15)
+_target = NodePath("../Player")
 
 [node name="Cyclops" parent="." instance=ExtResource("3_lquwl")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -15)

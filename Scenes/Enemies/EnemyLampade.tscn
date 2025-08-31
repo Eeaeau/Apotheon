@@ -78,9 +78,10 @@ _data = {
 &"sword_swing": SubResource("Animation_kyqiw")
 }
 
-[node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("_agent") groups=["Enemy"]]
 script = ExtResource("1_ko0ql")
 _element = 1
+_agent = NodePath("NavigationAgent3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_f3sb7")
@@ -120,5 +121,7 @@ libraries = {
 }
 
 [node name="SwordAttackCooldown" type="Timer" parent="Helpers"]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [connection signal="timeout" from="Helpers/SwordAttackCooldown" to="." method="_on_sword_attack_cooldown_timeout"]
