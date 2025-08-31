@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck5fi47134a65"]
+[gd_scene load_steps=10 format=3 uid="uid://ck5fi47134a65"]
 
 [ext_resource type="PackedScene" uid="uid://dxdo6ck1llul3" path="res://Scenes/Environment/arena.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bgrydh38f63bv" path="res://Scenes/Player.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bv2j6rceuyoxq" path="res://Scenes/Enemies/EnemyCyclops.tscn" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://i3pxbx1kgh4b" path="res://Scenes/Enemies/EnemyLampade.tscn" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bcl02jqa3d4ex" path="res://Scenes/Enemies/EnemySiren.tscn" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://daj0c5v54rxc0" path="res://Assets/blend/simple_gate.blend" id="6_7mycd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lquwl"]
 sky_top_color = Color(0.656697, 0.715369, 0.797175, 1)
@@ -44,3 +45,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 
 
 [node name="Lampade" parent="." instance=ExtResource("4_7mycd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5, 1, -15)
+
+[node name="assets" parent="." instance=ExtResource("6_7mycd")]
+transform = Transform3D(0.045, 0, 0, 0, 0.045, 0, 0, 0, 0.045, 0.338934, -0.043922, -53.2477)
