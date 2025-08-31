@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck5fi47134a65"]
+[gd_scene load_steps=9 format=3 uid="uid://ck5fi47134a65"]
 
 [ext_resource type="PackedScene" uid="uid://dxdo6ck1llul3" path="res://Scenes/Environment/arena.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bgrydh38f63bv" path="res://Scenes/Player.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bv2j6rceuyoxq" path="res://Scenes/Enemies/EnemyCyclops.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://i3pxbx1kgh4b" path="res://Scenes/Enemies/EnemyLampade.tscn" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bcl02jqa3d4ex" path="res://Scenes/Enemies/EnemySiren.tscn" id="5_272bh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lquwl"]
+sky_top_color = Color(0.656697, 0.715369, 0.797175, 1)
+sky_horizon_color = Color(0.948928, 0.955846, 0.967298, 1)
+ground_horizon_color = Color(0.948928, 0.955846, 0.967298, 1)
+
+[sub_resource type="Sky" id="Sky_7mycd"]
+sky_material = SubResource("ProceduralSkyMaterial_lquwl")
+
+[sub_resource type="Environment" id="Environment_272bh"]
+background_mode = 2
+sky = SubResource("Sky_7mycd")
 
 [node name="Node3D" type="Node3D"]
 
@@ -10,8 +25,22 @@
 [node name="Arena" parent="Environment" instance=ExtResource("1_ig7tw")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_272bh")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(0.999521, -0.00206397, 0.0308708, -0.0309398, -0.0666773, 0.997295, 0, -0.997772, -0.0667092, 0, 30.4829, 0)
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 3.375
+shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+
+[node name="Siren" parent="." instance=ExtResource("5_272bh")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5, 1, -15)
+
+[node name="Cyclops" parent="." instance=ExtResource("3_lquwl")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -15)
+
+[node name="Lampade" parent="." instance=ExtResource("4_7mycd")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5, 1, -15)
