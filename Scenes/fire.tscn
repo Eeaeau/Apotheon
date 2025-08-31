@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ynllrbc6v0yt"]
+[gd_scene load_steps=32 format=3 uid="uid://dupvngwhf8rh4"]
 
 [ext_resource type="Shader" uid="uid://b2s665td4u4y8" path="res://shaders/fire_shader.tres" id="1_yr3ur"]
 [ext_resource type="Texture2D" uid="uid://bojw3baxp8g35" path="res://Assets/textures/kenney_particle_pack/flame_01.png" id="2_idb68"]

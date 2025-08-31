@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://db8rwb6odpi7o"]
+
+[ext_resource type="PackedScene" uid="uid://dlgrydgb4i74j" path="res://Assets/blend/innter_wall.blend" id="1_fy535"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fpb66"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="Ground" type="Node3D"]
+
+[node name="innter_wall" parent="." instance=ExtResource("1_fy535")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="innter_wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="innter_wall/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_fpb66")

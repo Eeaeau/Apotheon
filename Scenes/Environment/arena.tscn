@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxdo6ck1llul3"]
+[gd_scene load_steps=4 format=3 uid="uid://dxdo6ck1llul3"]
 
 [ext_resource type="PackedScene" uid="uid://b68keeubq1m6l" path="res://Assets/blend/colosseum.blend" id="1_wmatn"]
-[ext_resource type="PackedScene" uid="uid://cpy80neiqy8wq" path="res://Scenes/Environment/innter_wall_and_floor.tscn" id="2_wmatn"]
 [ext_resource type="PackedScene" uid="uid://daj0c5v54rxc0" path="res://Assets/blend/simple_gate.blend" id="3_l4221"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_wmatn"]
@@ -13,8 +12,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.260929, -0.195755, -0.1543
 shape = SubResource("HeightMapShape3D_wmatn")
 
 [node name="colosseum" parent="." instance=ExtResource("1_wmatn")]
-
-[node name="innter_wall" parent="." instance=ExtResource("2_wmatn")]
 
 [node name="assets" parent="." instance=ExtResource("3_l4221")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -95.7459)
