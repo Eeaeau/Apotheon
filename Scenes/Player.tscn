@@ -97,7 +97,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886707, 0)
 
 [node name="Weapon" type="Node3D" parent="Head/Viewport"]
 script = ExtResource("2_gntrk")
-element = 1
 baseDamage = 10.0
 
 [node name="SwordPoint" type="Node3D" parent="Head/Viewport/Weapon"]
