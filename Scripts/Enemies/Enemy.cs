@@ -9,7 +9,7 @@ public partial class Enemy : CharacterBody3D
 	[Export] private float _moveSpeed = 4f;
 	[Export] private Node3D _target; // Assign the player node in the editor
 	[Export] private NavigationAgent3D _agent; // Now exported for explicit assignment
-	[Export] private bool _debug = true; // Enable/disable debug prints
+	[Export] private bool _debug = false; // Enable/disable debug prints
 
 	private float _currentHealth;
 	//A matrix of damage multipliers based on elements in the format of [damageElement, entityElement]
@@ -66,11 +66,12 @@ public partial class Enemy : CharacterBody3D
 			if (_debug && (Engine.GetFramesDrawn() % 30) == 0) GD.Print($"{Name}: Navigation finished. Current pos={GlobalTransform.Origin}, target={_agent.TargetPosition}");
 			Velocity = Velocity.MoveToward(Vector3.Zero, (float)delta * _moveSpeed * 2f);
 			MoveAndSlide();
+			_agent.SetVelocity(Velocity);
 			return;
 		}
 
 		Vector3[] path = _agent.GetCurrentNavigationPath();
-		if (_debug && (Engine.GetFramesDrawn() % 60) == 0)
+		if (_debug && (Engine.GetFramesDrawn() % 90) == 0)
 		{
 			GD.Print($"{Name}: Path length={path.Length}, Agent pos={GlobalTransform.Origin}, Target={_agent.TargetPosition}");
 		}
@@ -81,17 +82,25 @@ public partial class Enemy : CharacterBody3D
 		}
 
 		Vector3 nextPathPoint = _agent.GetNextPathPosition();
+		// Skip first waypoint if it's basically the same horizontal position (often directly below due to height difference)
+		Vector3 horizDelta = new Vector3(nextPathPoint.X - GlobalTransform.Origin.X, 0, nextPathPoint.Z - GlobalTransform.Origin.Z);
+		if (horizDelta.Length() < 0.05f && path.Length > 1)
+		{
+			nextPathPoint = path[1];
+			if (_debug) GD.Print($"{Name}: Skipping vertical-only waypoint. Using {nextPathPoint}");
+		}
+
 		Vector3 toPoint = nextPathPoint - GlobalTransform.Origin;
-		toPoint.Y = 0; // Keep movement on horizontal plane
+		Vector3 moveDir = new Vector3(toPoint.X, 0, toPoint.Z);
 
 		if (_debug && (Engine.GetFramesDrawn() % 30) == 0)
 		{
-			GD.Print($"{Name}: Next point={nextPathPoint}, Dist={toPoint.Length():F2}");
+			GD.Print($"{Name}: Next point={nextPathPoint}, horizDist={moveDir.Length():F2}");
 		}
 
-		if (toPoint.Length() > 0.05f)
+		if (moveDir.Length() > 0.01f)
 		{
-			Vector3 desiredVel = toPoint.Normalized() * _moveSpeed;
+			Vector3 desiredVel = moveDir.Normalized() * _moveSpeed;
 			Velocity = new Vector3(desiredVel.X, Velocity.Y, desiredVel.Z);
 		}
 		else
@@ -100,6 +109,7 @@ public partial class Enemy : CharacterBody3D
 		}
 
 		MoveAndSlide();
+		_agent.SetVelocity(Velocity); // Helps avoidance update
 		if (_debug && (Engine.GetFramesDrawn() % 30) == 0)
 		{
 			GD.Print($"{Name}: Velocity={Velocity}");
