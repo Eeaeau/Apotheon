@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxdo6ck1llul3"]
 
 [ext_resource type="PackedScene" uid="uid://b68keeubq1m6l" path="res://Assets/blend/colosseum.blend" id="1_wmatn"]
-[ext_resource type="PackedScene" uid="uid://cpy80neiqy8wq" path="res://Scenes/Environment/innter_wall_and_floor.tscn" id="2_wmatn"]
+[ext_resource type="PackedScene" path="res://Scenes/Environment/innter_wall_and_floor.tscn" id="2_wmatn"]
 [ext_resource type="PackedScene" uid="uid://daj0c5v54rxc0" path="res://Assets/blend/simple_gate.blend" id="3_l4221"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_wmatn"]
